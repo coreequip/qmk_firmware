@@ -19,11 +19,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
-ENV KEYBOARD=ergodox_ez
-ENV KEYMAP=default
+ENV KEYBOARD=xd60/rev3
+ENV KEYMAP=nic888
 
 VOLUME /qmk_firmware
 WORKDIR /qmk_firmware
-COPY . .
 
-CMD make $KEYBOARD:$KEYMAP
+CMD make $KEYBOARD:$KEYMAP && mv .build/ build/
