@@ -97,17 +97,14 @@ bool processArrowFN(uint16_t keycode, keyrecord_t *record) {
 
 
 bool processBacklightFN(uint16_t keycode, keyrecord_t *record) {
-  if (!is_fn_active || !record->event.pressed || !is_alt_active) {
+  if (!is_fn_active || !record->event.pressed) {
     return true;
   }
-  if (keycode == KC_MINS) {
+  if (keycode == KC_LBRC) {
     backlight_decrease();
     return false;
-  } else if (keycode == KC_EQL) {
+  } else if (keycode == KC_RBRC) {
     backlight_increase();
-    return false;
-  } else if (keycode == KC_0) {
-    backlight_toggle();
     return false;
   }
   return true;
@@ -168,12 +165,16 @@ bool processInsert(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-bool processMenu(uint16_t keycode, keyrecord_t *record) {
+bool processMenuPscr(uint16_t keycode, keyrecord_t *record) {
   if (!is_fn_active || !record->event.pressed) {
     return true;
   }
   if (keycode == KC_BSLS) {
     SEND_STRING(SS_TAP(X_APPLICATION));
+    return false;
+  }
+  if (keycode == KC_P) {
+    SEND_STRING(SS_TAP(X_PSCREEN));
     return false;
   }
   return true;
@@ -267,7 +268,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if(!processFunctionKeys(keycode, record)){
         return false;
       }
-      if(!processMenu(keycode, record)){
+      if(!processMenuPscr(keycode, record)){
         return false;
       }
       if(!processGrvTilde(keycode, record)){
