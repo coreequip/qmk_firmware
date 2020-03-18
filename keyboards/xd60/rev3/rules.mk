@@ -67,3 +67,4 @@ SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
 LAYOUTS = 60_ansi
 
 COMBO_ENABLE = yes
+KEY_LOCK_ENABLE = yes
